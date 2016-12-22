@@ -1,0 +1,55 @@
+body{
+	width: 800px;
+	font-family: Georgia,'微軟正黑體';
+	text-align: center;
+	font-size: 24px;
+	min-height: 100%;
+}
+h1{
+	color: #FF4800;
+	text-shadow: 3px 2px #1E1E1E;
+}
+.header,.footer{
+  height: 100px;
+  width: 800px;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  background: #FF4800;
+  font-size: 50px;
+  font-weight: bold;
+}
+.footer{
+	font-size: 18px;
+}
+table{
+	border: 2px solid white;
+	border-collapse:collapse;
+	width: 600px;
+	margin-left: 100px;
+}
+td,th{
+	border: 1px solid white;
+}
+a{
+	color: #FF4800;
+}
+a:hover{
+	color: black;
+}
+th{
+	background-color: #FF4800;
+	color: white;
+	
+}
+input[type=submit]{
+	background-color: #FF4800;
+	color: white;
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	font-family: Georgia,'微軟正黑體';
+	border-width: 0px;
+	font-size: 24px;
+	margin-top: 20px;
+}

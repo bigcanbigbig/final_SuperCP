@@ -1,0 +1,42 @@
+<h1>註冊</h1>
+<SCRIPT type="text/javascript">
+	function aCheck(uA){
+		var users=new Array();
+		var count;
+		<% for (var i=0;i<users.length;i++){ %>
+			//count=<%= i %>;
+			<% if(users[i]!=null){ %>
+			users[<%= i %>]="<%= users[i].uAccount %>";
+		<% }} %>
+		for (var i=0;i<users.length;i++){
+			if(uA==users[i]){
+				return 0;
+				break;
+			}
+		}
+		return 1;
+	}
+	function check(){
+		if(reg.uA.value==""){
+			alert("帳號未填！");
+		}else if(reg.uP.value==""){
+			alert("密碼未填！");
+		}else if(reg.uP.value!==reg.uP2.value){
+			alert("密碼不一致！");
+		}else if(reg.uN.value==""){
+			alert("用戶名未填！");
+		}else if(aCheck(reg.uA.value)==0){
+			alert("帳號已存在！");
+		}else{
+			reg.submit();
+		}
+	}
+</SCRIPT>
+<form name="reg" action="/rSuccess" method="post">
+	<input type="hidden" name="num" value=<%= Number(users.length) %>>
+	帳號：<input type="text" name="uA">
+	密碼：<input type="password" name="uP">
+	再次輸入密碼：<input type="password" name="uP2">
+	用戶名：<input type="text" name="uN">
+	<input type="button" value="註冊" onClick="check()" />
+</form>
