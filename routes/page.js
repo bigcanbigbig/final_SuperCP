@@ -56,9 +56,7 @@ function loginCheck(uAccount, uPwd){
 /*****************--------*****************/
 
 exports.index = function(req, res) {
-  res.render('pages/index',{
-    message: ""
-  });
+  res.render('pages/index');
 };
 
 exports.register = function(req, res){
@@ -82,12 +80,10 @@ exports.rSuccess = function(req, res){
 
 
 exports.login = function(req, res){
-  var message="你已登入囉！";
   if (req.session.uNum!=null) {
-    res.render('pages/index',{
-      uName: users[req.session.uNum].uName,
-      message: message
-    });
+    res.redirect('/',{
+      uNum: req.session.uNum
+    },0);
   }else{
     res.render('pages/login');
   }
@@ -114,3 +110,10 @@ exports.lResult = function(req, res){
     });
   }
 };
+
+exports.logout = function(req, res){
+  req.session.uNum=null;
+  res.redirect('/',{
+      uNum: req.session.uNum
+    },0);
+}

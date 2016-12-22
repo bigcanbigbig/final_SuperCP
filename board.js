@@ -41,6 +41,7 @@ app.get('/register', page.register);
 app.post('/rSuccess',page.rSuccess);
 app.get('/login', page.login);
 app.post('/lResult', page.lResult);
+app.get('/logout', page.logout);
 
 //session
 var sess;
