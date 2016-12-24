@@ -18,8 +18,8 @@ var database = firebase.database();
 var users= new Array();
 firebase.database().ref('/user').once('value').then(function(snapshot) {
   users=snapshot.val();
-  console.log(users);
 });
+
 
 //註冊帳號
 function register(num, uAccount, uPwd, uName) {
