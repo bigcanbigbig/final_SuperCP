@@ -3,11 +3,13 @@ var path = require('path');
 
 // NPM 模組
 var app = require('express')();
+var express = require('express');
 var partials = require('express-partials');
 var static = require('serve-static');
 var bodyParser = require('body-parser');
-var favicon = require('serve-favicon'); 
-var session = require('express-session');   
+var favicon = require('serve-favicon');
+//session的
+var session = require('express-session');
 
 // router設定
 var page = require('./routes/page');
@@ -16,6 +18,8 @@ var page = require('./routes/page');
 // 讓回傳的值可以解析 json與 urlencoded
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true}));
+//app.use(multer({ dest: './uploads/'}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // 版型設定
 app.use(partials());
@@ -42,6 +46,7 @@ app.post('/rSuccess',page.rSuccess);
 app.get('/login', page.login);
 app.post('/lResult', page.lResult);
 app.get('/logout', page.logout);
+app.get('/painter', page.painter);
 
 //session
 var sess;
@@ -55,4 +60,3 @@ app.get('/',function(req,res){
 var server = app.listen(app.get('port'), function() {  
   console.log('Listening on port 3000');  
 });
-

@@ -13,15 +13,15 @@ var config = {
  };
 firebase.initializeApp(config);
 var database = firebase.database();
-//console.log(database);
 
+//讀users資料表
 var users= new Array();
 firebase.database().ref('/user').once('value').then(function(snapshot) {
   users=snapshot.val();
   console.log(users);
 });
 
-
+//註冊帳號
 function register(num, uAccount, uPwd, uName) {
     var point=0;
     var userRef = database.ref('user/'+num);//num?
@@ -36,7 +36,7 @@ function register(num, uAccount, uPwd, uName) {
     });  
 }
 
-
+//檢查登入
 function loginCheck(uAccount, uPwd){
   firebase.database().ref('/user').once('value').then(function(snapshot) {
     users=snapshot.val();
@@ -78,7 +78,6 @@ exports.rSuccess = function(req, res){
   });
 };
 
-
 exports.login = function(req, res){
   if (req.session.uNum!=null) {
     res.redirect('/',{
@@ -117,3 +116,7 @@ exports.logout = function(req, res){
       uNum: req.session.uNum
     },0);
 }
+
+exports.painter = function(req, res) {
+  res.render('pages/painter');
+};

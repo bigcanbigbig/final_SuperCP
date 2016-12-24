@@ -1,6 +1,71 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+<script type="text/javascript" src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<script type="text/javascript" src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+<script type="text/javascript" src="assets/js/uploadimg.js"></script>
+<style>
+p{
+  font-weight: bold;
+  font-size: 2.5em;
+  padding-top: 40px;
+}
+
+img{
+  cursor:pointer;
+  width: 100%;
+  border-style: solid; 
+  border-color: #000000 #000000; 
+  border-width: medium;
+}
+
+input[type=file] {
+    margin: 0 auto;
+}
+</style>
 <% if(uNum==null){%>
-	<a href="/register">註冊</a> 
-	<a href="/login">登入</a>
+  <a href="/register">註冊</a><br/>
+  <a href="/login">登入</a>
 <%}else{%>
-	<a href="/logout">登出</a>
+  <a href="/logout">登出</a>
+
+<a href="/painter">畫圖</a><br/>
+
+<h3>上傳圖片</h3> 
+<div ng-app='img2fire'>
+  <div ng-controller='base64Ctrl'>
+    <div class="container-fluid">
+      <p class="text-info" align="center">Upload Images to Firebase</p>
+      <hr />
+
+      <form ng-submit="uploadFile()">
+        <input type="file" name="file" class="inputimg" id="nameImg" accept="image/*">
+        <br />
+        <span class="input-group-btn">
+                <button  type="submit" class="btn btn-block">Upload Image 
+                  <i class="material-icons">send</i>
+                </button>
+          </span>
+      </form>
+      <hr />
+      <div ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+        <img ng-src="{{img.base64}}">
+        <a class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="dPallete"></div>
+<div id="dLine"></div>
+<div id="dCanvas">
+<canvas id="cSketchPad" width="300" height="300" style="border: 2px solid gray" />
+</div>
+<input type="button" id="bGenImage" value="Generate Image" />
+<div id="dOutput"></div>
 <%}%>
