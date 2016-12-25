@@ -15,7 +15,6 @@ p{
   padding-top: 40px;
 }
 
-
 input[type=file] {
     margin: 0 auto;
 }
@@ -27,9 +26,6 @@ input[type=file] {
   <a href="/logout">登出</a>
 
 <a href="/painter">畫圖</a><br/>
-
-
-
 <h3>上傳圖片</h3> 
 <div ng-app='img2fire'>
   <div ng-controller='base64Ctrl'>
@@ -47,6 +43,7 @@ input[type=file] {
           </span>
       </form>
       <hr />
+
       <ul>
       <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
         <img ng-src="{{img.base64}}">

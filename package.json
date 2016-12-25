@@ -18,6 +18,10 @@
   "homepage": "https://github.com/elmas87532/new-board#readme",
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "angular": "^1.6.0",
+>>>>>>> 1678e4e7f82819a2eb566893d6bfaf09ba588050
 =======
     "angular": "^1.6.0",
 >>>>>>> 1678e4e7f82819a2eb566893d6bfaf09ba588050
@@ -27,13 +31,19 @@
     "express-partials": "^0.3.0",
     "firebase": "^3.6.3",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 1678e4e7f82819a2eb566893d6bfaf09ba588050
     "firebase-image-uploader": "^0.1.5",
     "fs": "0.0.1-security",
     "literallycanvas": "^0.4.14",
     "multer": "^1.2.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+<<<<<<< HEAD
+>>>>>>> 1678e4e7f82819a2eb566893d6bfaf09ba588050
+=======
 >>>>>>> 1678e4e7f82819a2eb566893d6bfaf09ba588050
     "serve-favicon": "^2.3.2",
     "serve-static": "^1.11.1"

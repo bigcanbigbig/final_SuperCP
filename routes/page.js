@@ -20,7 +20,6 @@ firebase.database().ref('/user').once('value').then(function(snapshot) {
   users=snapshot.val();
 });
 
-
 //註冊帳號
 function register(num, uAccount, uPwd, uName) {
     var point=0;
@@ -54,6 +53,10 @@ function loginCheck(uAccount, uPwd){
 /*****************--------*****************/
 /*****************--------*****************/
 /*****************--------*****************/
+
+/*exports.index = function(req, res) {
+  res.render('pages/index');
+};*/
 
 exports.index = function(req, res) {
   res.render('pages/index');
