@@ -23,8 +23,18 @@
       }
 
     </style>
+<%
+if(uName == ""){
+  %><a href="/register">註冊</a> 
+<a href="/login">登入</a><a href="/">回首頁</a><br/><%
+}else{
+  %><h3>哈囉! <%=uName%></h3>
+  <a href="/personal">我的作品</a>
+  <a href="/">回首頁</a>
+  <%
+}
 
-<h3>Name : <%=uName%></h3>
+%>
 <h3>上船底圖</h3>
 <input type="file" id="canvas-bg-image" accept="image/*"/>
 <input type="button" id="up-bg-img" onclick="upBgImg();" value="上傳" />
@@ -137,8 +147,16 @@ var uName = "<%=uName%>";
 
 
      var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uName);
+     var indexImg = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
 
    img.push({
+      date: Firebase.ServerValue.TIMESTAMP,
+      base64: lc.getImage().toDataURL(),
+      uName: "<%=uName%>",
+      uId: 1
+   });
+
+   indexImg.push({
       date: Firebase.ServerValue.TIMESTAMP,
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
