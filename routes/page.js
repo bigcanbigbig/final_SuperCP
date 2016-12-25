@@ -56,8 +56,20 @@ function loginCheck(uAccount, uPwd){
 /*****************--------*****************/
 /*****************--------*****************/
 
+
 exports.index = function(req, res) {
-  res.render('pages/index');
+
+
+  if(req.session.uNum!=null){
+    res.render('pages/index',{
+      uName: users[req.session.uNum].uName
+    });
+  }else{
+    res.render('pages/index',{
+      uName: ""
+    });
+  }
+  
 };
 
 exports.register = function(req, res){
@@ -116,9 +128,28 @@ exports.lResult = function(req, res){
 
 
 exports.painter = function(req, res) {
-  res.render('pages/painter');
+  if(req.session.uNum!=null){
+    res.render('pages/painter',{
+      uName: users[req.session.uNum].uName
+    });
+  }else{
+    res.render('pages/painter',{
+      uName: ""
+    });
+  }
 };
 
+exports.personal = function(req, res) {
+  if(req.session.uNum!=null){
+    res.render('pages/personal',{
+      uName: users[req.session.uNum].uName
+    });
+  }else{
+    res.render('pages/personal',{
+      uName: ""
+    });
+  }
+};
 
 
 

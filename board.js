@@ -46,6 +46,7 @@ app.post('/rSuccess',page.rSuccess);
 app.get('/login', page.login);
 app.post('/lResult', page.lResult);
 app.get('/painter', page.painter);
+app.get('/personal', page.personal);
 
 //session
 var sess;

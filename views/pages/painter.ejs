@@ -24,6 +24,7 @@
       }
 
     </style>
+<h3>Name : <%=uName%></h3>
 <h3>上船底圖</h3>
 <input type="file" id="canvas-bg-image" accept="image/*"/>
 <input type="button" id="up-bg-img" onclick="upBgImg();" value="上傳" />
@@ -126,6 +127,9 @@ $("#canvas-up-image").on("change", function(event) {
 
 <script type="text/javascript">
 
+//---------------------------------輸出圖片--------------------
+//寫死user---->testABC
+var uName = "<%=uName%>";
 
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
@@ -135,7 +139,7 @@ $("#canvas-up-image").on("change", function(event) {
       console.log("URLLLLL:"+lc.getImage().toDataURL());
 
 
-     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
+     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uName);
 
    img.push({
       date: Firebase.ServerValue.TIMESTAMP,
