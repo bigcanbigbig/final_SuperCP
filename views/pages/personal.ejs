@@ -27,8 +27,17 @@ input[type=file] {
     margin: 0 auto;
 }
 </style>
-<a href="/register">註冊</a> 
-<a href="/login">登入</a><br/>
+<%
+if(uName == ""){
+  %><a href="/register">註冊</a> 
+<a href="/login">登入</a><br/><%
+}else{
+  %><h3>哈囉! <%=uName%></h3>
+  <a href="/">回首頁</a>
+  <%
+}
+
+%>
 <a href="/painter">畫圖</a><br/>
 
 <h3>NAME: <%=uName%></h3> 

@@ -62,7 +62,8 @@ exports.index = function(req, res) {
 
   if(req.session.uNum!=null){
     res.render('pages/index',{
-      uName: users[req.session.uNum].uName
+      uName: users[req.session.uNum].uName,
+      uNum: req.session.uNum
     });
   }else{
     res.render('pages/index',{
@@ -130,7 +131,8 @@ exports.lResult = function(req, res){
 exports.painter = function(req, res) {
   if(req.session.uNum!=null){
     res.render('pages/painter',{
-      uName: users[req.session.uNum].uName
+      uName: users[req.session.uNum].uName,
+      uNum: req.session.uNum
     });
   }else{
     res.render('pages/painter',{
@@ -142,7 +144,8 @@ exports.painter = function(req, res) {
 exports.personal = function(req, res) {
   if(req.session.uNum!=null){
     res.render('pages/personal',{
-      uName: users[req.session.uNum].uName
+      uName: users[req.session.uNum].uName,
+      uNum: req.session.uNum
     });
   }else{
     res.render('pages/personal',{
