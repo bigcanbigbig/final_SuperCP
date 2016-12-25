@@ -1,24 +1,41 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+<script type="text/javascript" src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<script type="text/javascript" src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 <link href="assets/css/literallycanvas.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 <style type="text/css">
       .fs-container {
-        width: 620px;
+        width: 1000px;
         margin: auto;
       }
 
       .literally {
         width: 100%;
-        height: 55%;
+        height: 75%;
         position: relative;
       }
 
     </style>
+
+<h3>Name : <%=uName%></h3>
 <h3>上船底圖</h3>
 <input type="file" id="canvas-bg-image" accept="image/*"/>
-<input type="button" name="submit-bg-image" id="submit-bg-image" onclick="changeCanvasBg();"/>
+<input type="button" id="up-bg-img" onclick="upBgImg();" value="上傳" />
+
+<h3>上船小圖</h3>
+<input type="file" id="canvas-up-image" accept="image/*"/>
+<input type="button" id="up-img" onclick="upImg();" value="上傳" />
 
 <script>
+/*-----------------上船底圖---------------------*/
+
 
 $("#canvas-bg-image").on("change", function(event) {
 
@@ -27,12 +44,57 @@ $("#canvas-bg-image").on("change", function(event) {
   reader.readAsDataURL(file);
   reader.onload = function(arg) {
 
-    var img = '<style>canvas{background-image:url(' + arg.target.result + ');background-size: 620px auto; background-repeat: no-repeat;}</style>';
-    $("head").append(img);
-  }
+  var backgroundImage = new Image();
+  backgroundImage.src = arg.target.result;
+  console.log('sssss');
+  console.log(backgroundImage.src);
+  console.log(backgroundImage.width);
+
+  lc = LC.init(
+      document.getElementById("lc"),
+      {
+        imageURLPrefix: 'assets/plugins/lc-images',
+        toolbarPosition: 'bottom',
+        defaultStrokeWidth: 2,
+        strokeWidths: [1, 2, 3, 5, 30],
+        backgroundShapes: [
+          LC.createShape(
+            'Image', {x: 0, y: 0, image: backgroundImage, scale: 2})
+        ]
+      });
+
+     
+    
+  };
+
 });
 
 
+
+</script>
+
+
+
+
+<script>
+/*-----------------上船小圖---------------------*/
+$("#canvas-up-image").on("change", function(event) {
+
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function(arg) {
+
+  var upImage = new Image();
+  upImage.src = arg.target.result;
+  console.log('sssss');
+  console.log(upImage.src);
+  console.log(upImage.width);
+  lc.saveShape(LC.createShape('Image', {x: 100, y: 100, image: upImage}));
+
+  };
+
+});
 </script>
 
 <div class="fs-container">
@@ -53,7 +115,6 @@ $("#canvas-bg-image").on("change", function(event) {
       });
 
 
-
     </script>
 
 
@@ -64,10 +125,30 @@ $("#canvas-bg-image").on("change", function(event) {
 <script type="text/javascript">
 
 
+//---------------------------------輸出圖片--------------------
+var uName = "<%=uName%>";
+
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
       e.preventDefault();
-      window.open(lc.getImage().toDataURL());
-    });
+      //window.open(lc.getImage().toDataURL());
+      console.log("NAURLLLLL:"+lc.getImage());
+      console.log("URLLLLL:"+lc.getImage().toDataURL());
+
+
+     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uName);
+
+   img.push({
+      date: Firebase.ServerValue.TIMESTAMP,
+      base64: lc.getImage().toDataURL(),
+      uName: "<%=uName%>",
+      uId: 1
+   });
+
+
+
+
+
+});
 
 </script>
