@@ -7,6 +7,7 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
 <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <script type="text/javascript" src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
 <link href="assets/css/literallycanvas.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -35,6 +36,7 @@ if(uName == ""){
 }
 
 %>
+
 <h3>上船底圖</h3>
 <input type="file" id="canvas-bg-image" accept="image/*"/>
 <input type="button" id="up-bg-img" onclick="upBgImg();" value="上傳" />
@@ -45,6 +47,7 @@ if(uName == ""){
 
 <script>
 /*-----------------上船底圖---------------------*/
+
 
 
 $("#canvas-bg-image").on("change", function(event) {
@@ -105,6 +108,9 @@ $("#canvas-up-image").on("change", function(event) {
   };
 
 });
+
+
+
 </script>
 
 <div class="fs-container">
@@ -124,7 +130,6 @@ $("#canvas-up-image").on("change", function(event) {
         strokeWidths: [1, 2, 3, 5, 30]
       });
 
-
     </script>
 
 
@@ -134,20 +139,28 @@ $("#canvas-up-image").on("change", function(event) {
 
 <script type="text/javascript">
 
-
 //---------------------------------輸出圖片--------------------
+//寫死user---->testABC
 var uName = "<%=uName%>";
+var uAccount = "<%=uAccount%>";
+
+
 
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
-      e.preventDefault();
+
+    if(uAccount == ""){
+      alert("請先登入!");
+      window.location = "/login";
+    }else{
+    e.preventDefault();
       //window.open(lc.getImage().toDataURL());
       console.log("NAURLLLLL:"+lc.getImage());
       console.log("URLLLLL:"+lc.getImage().toDataURL());
 
 
-     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uName);
-     var indexImg = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
+     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
+     var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/total");
 
    img.push({
       date: Firebase.ServerValue.TIMESTAMP,
@@ -155,17 +168,14 @@ var uName = "<%=uName%>";
       uName: "<%=uName%>",
       uId: 1
    });
-
-   indexImg.push({
+   index_img.push({
       date: Firebase.ServerValue.TIMESTAMP,
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
       uId: 1
    });
-
-
-
-
+    }
+      
 
 });
 
