@@ -20,26 +20,6 @@ p{
 input[type=file] {
     margin: 0 auto;
 }
-
-ul{
-  margin-left: 5px;
-  margin-right: 5px;
-}
-li{
-  width:320px;
-  height: 260px;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 4px;
-  float: left;
-}
-img{
-  width: 320px;
-  height: 240px;
-}
-.clear{
-  clear: both;
-}
 </style>
 
 <%
@@ -60,18 +40,8 @@ if(uName == ""){
 <div ng-app='img2fire'>
   <div ng-controller='base64Ctrl'>
     <div class="container-fluid">
-      <p class="text-info" align="center">Upload Images to Firebase</p>
-      <hr />
 
-      <form ng-submit="uploadFile()">
-        <input type="file" name="file" class="inputimg" id="nameImg" accept="image/*">
-        <br />
-        <span class="input-group-btn">
-                <button  type="submit" class="btn btn-block">Upload Image 
-                  <i class="material-icons">send</i>
-                </button>
-          </span>
-      </form>
+      
       <hr />
       <ul>
       <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">

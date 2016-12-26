@@ -165,13 +165,14 @@ var uAccount = "<%=uAccount%>";
 
 
      var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
-     var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/total");
+     var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/total");
 
    img.push({
       date: Firebase.ServerValue.TIMESTAMP,
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
       wName: wName,
+      uId: <%=uNum%>,
       wContent: wContent
    });
    index_img.push({
@@ -179,6 +180,7 @@ var uAccount = "<%=uAccount%>";
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
       wName: wName,
+      uId: <%=uNum%>,
       wContent: wContent
    });
     }
