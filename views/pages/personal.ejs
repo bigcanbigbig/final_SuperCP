@@ -15,17 +15,29 @@ p{
   padding-top: 40px;
 }
 
-img{
-  cursor:pointer;
-  width: 100%;
-  border-style: solid; 
-  border-color: #000000 #000000; 
-  border-width: medium;
-}
-
 input[type=file] {
     margin: 0 auto;
 }
+ul{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+li{
+  width:320px;
+  height: 260px;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 4px;
+  float: left;
+}
+img{
+  width: 320px;
+  height: 240px;
+}
+.clear{
+  clear: both;
+}
+
 </style>
 <%
 if(uName == ""){
@@ -57,10 +69,14 @@ if(uName == ""){
           </span>
       </form>
       <hr />
-      <div ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+      <ul>
+      <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
         <img ng-src="{{img.base64}}">
+        <a  href="/work?id={img.uId}">{{img.wName}}</a>
         <a class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
-      </div>
+      </li>
+      </ul>
+      <div class="clear"></div>
     </div>
   </div>
 

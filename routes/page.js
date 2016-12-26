@@ -142,6 +142,7 @@ exports.painter = function(req, res) {
   }else{
     res.render('pages/painter',{
       uName: "",
+      uNum: "",
       uAccount: ""
     });
   }
