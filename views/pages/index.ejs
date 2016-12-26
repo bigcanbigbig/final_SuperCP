@@ -45,8 +45,8 @@ if(uName == ""){
       <hr />
       <ul>
       <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
-        <img ng-src="{{img.base64}}">
-        <a class="btn btn-danger btn-block" href="artist/?id={{img.uId}}">{{img.uName}}</a>
+        <a href="work/?id={{img.$id}}&author={{img.uId}}"><img ng-src="{{img.base64}}"></a>
+        <a class="btn btn-danger btn-block" href="personal/?id={{img.uId}}">{{img.uName}}</a>
       </li>
       </ul>
       <div class="clear"></div>

@@ -162,3 +162,26 @@ exports.personal = function(req, res) {
     });
   }
 };
+//作品頁
+exports.work =function(req, res) {
+  var id = req.param('id').toString();
+  var author=req.param('author');
+  firebase.database().ref('/user').once('value').then(function(snapshot) {
+    users=snapshot.val();
+  });
+  var authorAccount=users[author].uAccount;
+  var authorName=users[author].uName;
+  var img= new Array();
+  firebase.database().ref('/images/'+authorAccount).child(id).once(id).then(function(snapshot) {
+    img=snapshot.val();
+    var timestamp = parseInt(img.date);
+    var myDate = new Date(timestamp);
+    res.render('pages/work',{
+        img: img.base64,
+        authorName: authorName,
+        authorId: author,
+        date: myDate
+    });
+  });
+  
+}
