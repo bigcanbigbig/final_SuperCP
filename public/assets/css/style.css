@@ -114,6 +114,7 @@ li{
 img{
 	width: 320px;
 	height: 240px;
+	cursor: pointer;
 }
 .clear{
 	clear: both;
