@@ -1,6 +1,7 @@
 //首頁
 
 /*****************FIREBASE*****************/
+
 /*****************FIREBASE*****************/
 /*****************FIREBASE*****************/
 
@@ -63,11 +64,15 @@ exports.index = function(req, res) {
   if(req.session.uNum!=null){
     res.render('pages/index',{
       uName: users[req.session.uNum].uName,
-      uNum: req.session.uNum
+      uAccount: users[req.session.uNum].uAccount,
+      uNum: req.session.uNum,
+      users: users
     });
   }else{
     res.render('pages/index',{
-      uName: ""
+      uName: "",
+      uAccount:"",
+      users: users
     });
   }
   
@@ -132,11 +137,13 @@ exports.painter = function(req, res) {
   if(req.session.uNum!=null){
     res.render('pages/painter',{
       uName: users[req.session.uNum].uName,
-      uNum: req.session.uNum
+      uNum: req.session.uNum,
+      uAccount: users[req.session.uNum].uAccount,
     });
   }else{
     res.render('pages/painter',{
-      uName: ""
+      uName: "",
+      uAccount: ""
     });
   }
 };
@@ -145,11 +152,13 @@ exports.personal = function(req, res) {
   if(req.session.uNum!=null){
     res.render('pages/personal',{
       uName: users[req.session.uNum].uName,
+      uAccount: users[req.session.uNum].uAccount,
       uNum: req.session.uNum
     });
   }else{
     res.render('pages/personal',{
-      uName: ""
+      uName: "",
+      uAccount: ""
     });
   }
 };

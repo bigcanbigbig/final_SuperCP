@@ -7,7 +7,6 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
 <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <script type="text/javascript" src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-<script type="text/javascript" src="assets/js/uploadimg.js"></script>
 <style>
 p{
   font-weight: bold;
@@ -69,4 +68,47 @@ if(uName == ""){
   </div>
 
 
+<table>
+<% for(var i=0; i<users.length; i++) {%> 
+  <% if (users[i]!=null){ %>
+  <tr>
+    <td><%= users[i].uName %></td>
+    <td><%= users[i].uAccount %></td>
+  </tr>
+  <% }} %>
+
+  </table>
+
+  <script>
+  console.log("ACCCC: <%=uAccount%>");
+
+  /********************GetImageArray*******************/
+//var angular = require('angular');
+var img2fire = angular.module('img2fire', ['firebase', 'angular.filter']);
+
+img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
+  
+  var ref = new Firebase("https://supercp-a8e9e.firebaseio.com/");
+
+  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/total");
+  $scope.imgs = $firebaseArray(img);
+
+  var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
+  
+
+  $scope.deleteimg = function(imgid) {
+    var r = confirm("Do you want to remove this image ?");
+    if (r == true) {
+      $scope.imgs.forEach(function(childSnapshot) {
+        if (childSnapshot.$id == imgid) {
+            $scope.imgs.$remove(childSnapshot).then(function(ref) {
+              ref.key() === childSnapshot.$id; // true
+            });
+        }
+      });
+    }
+  }
+
+});
+  </script>
 

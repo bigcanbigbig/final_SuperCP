@@ -142,17 +142,23 @@ $("#canvas-up-image").on("change", function(event) {
 //---------------------------------輸出圖片--------------------
 //寫死user---->testABC
 var uName = "<%=uName%>";
+var uAccount = "<%=uAccount%>";
 
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
+
+    if(uAccount == ""){
+    alert("請先登入!");
+    window.location = "/login";
+    }else{
       e.preventDefault();
       //window.open(lc.getImage().toDataURL());
       console.log("NAURLLLLL:"+lc.getImage());
       console.log("URLLLLL:"+lc.getImage().toDataURL());
 
 
-     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uName);
-     var indexImg = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
+     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
+     var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/total");
 
    img.push({
       date: Firebase.ServerValue.TIMESTAMP,
@@ -161,12 +167,16 @@ var uName = "<%=uName%>";
       uId: 1
    });
 
-   indexImg.push({
+   index_img.push({
       date: Firebase.ServerValue.TIMESTAMP,
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
       uId: 1
    });
+
+   }
+
+   
 
 
 
