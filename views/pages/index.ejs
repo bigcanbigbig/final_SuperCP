@@ -15,10 +15,33 @@ p{
   padding-top: 40px;
 }
 
+
+
 input[type=file] {
     margin: 0 auto;
 }
+
+ul{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+li{
+  width:320px;
+  height: 260px;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 4px;
+  float: left;
+}
+img{
+  width: 320px;
+  height: 240px;
+}
+.clear{
+  clear: both;
+}
 </style>
+
 <%
 if(uName == ""){
   %><a href="/register">註冊</a> 
@@ -26,11 +49,14 @@ if(uName == ""){
 }else{
   %><h3>哈囉! <%=uName%></h3>
   <a href="/personal">我的作品</a>
+  <a href="/logout">登出</a>
+  
 
 
 
 <a href="/painter">畫圖</a><br/>
 
+ 
 <div ng-app='img2fire'>
   <div ng-controller='base64Ctrl'>
     <div class="container-fluid">
@@ -47,7 +73,6 @@ if(uName == ""){
           </span>
       </form>
       <hr />
-
       <ul>
       <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
         <img ng-src="{{img.base64}}">
@@ -58,4 +83,22 @@ if(uName == ""){
     </div>
   </div>
 
-<%}%>
+
+<table>
+<% for(var i=0; i<users.length; i++) {%> 
+  <% if (users[i]!=null){ %>
+  <tr>
+    <td><%= users[i].uName %></td>
+    <td><%= users[i].uAccount %></td>
+  </tr>
+  <% }} %>
+
+  </table>
+<%
+}%>
+  <script>
+  console.log("ACCCC: <%=uAccount%>");
+  </script>
+
+
+

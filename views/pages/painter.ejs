@@ -133,7 +133,9 @@ $("#canvas-up-image").on("change", function(event) {
     </script>
 
 
-<form class="controls export">
+<form class="controls export" name="upload-img-work">
+取個名字: <input type="text" name="img-work-name" id="img-work-name"/><br/>
+加點敘述: <textarea rows="4" cols="50" name="img-work-content" id="img-work-content" form="upload-img-work"></textarea><br/>
   <input type="submit" data-action="export-as-png" value="Export as PNG">
 </form>
 
@@ -145,14 +147,17 @@ var uName = "<%=uName%>";
 var uAccount = "<%=uAccount%>";
 
 
-
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
 
     if(uAccount == ""){
       alert("請先登入!");
-      window.location = "/login";
     }else{
+
+    var wName = document.getElementById('img-work-name').value;
+    var wContent = document.getElementById('img-work-content').value;
+    console.log(wName);
+    console.log(wContent);
     e.preventDefault();
       //window.open(lc.getImage().toDataURL());
       console.log("NAURLLLLL:"+lc.getImage());
@@ -166,13 +171,15 @@ var uAccount = "<%=uAccount%>";
       date: Firebase.ServerValue.TIMESTAMP,
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
-      uId: 1
+      wName: wName,
+      wContent: wContent
    });
    index_img.push({
       date: Firebase.ServerValue.TIMESTAMP,
       base64: lc.getImage().toDataURL(),
       uName: "<%=uName%>",
-      uId: 1
+      wName: wName,
+      wContent: wContent
    });
     }
       

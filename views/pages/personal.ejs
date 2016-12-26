@@ -67,14 +67,14 @@ if(uName == ""){
 
 <script>
 
-var uName = "<%=uName%>";
-console.log(uName);
+var uAccount = "<%=uAccount%>";
+console.log(uAccount);
 
 var img2fire = angular.module('img2fire', ['firebase', 'angular.filter']);
 img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
   
 
-  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uName);
+  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
   $scope.imgs = $firebaseArray(img);
 
   
