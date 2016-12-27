@@ -18,6 +18,7 @@ var database = firebase.database();
 var users= new Array();
 firebase.database().ref('/user').once('value').then(function(snapshot) {
   users=snapshot.val();
+  
 });
 
 //註冊帳號
