@@ -22,20 +22,18 @@ input[type=file] {
 }
 </style>
 
+
+
 <%
 if(uName == ""){
-  %><a href="/register">註冊</a> 
-<a href="/login">登入</a><br/><%
+  %><div class="options"><a href="/register"><img class="btn" src="assets/images/sign_btn.png"/></a> 
+<a href="/login"><img class="btn" src="assets/images/login_btn.png"/></a></div><%
 }else{
-  %><h3>哈囉! <%=uName%></h3>
-  <a href="/personal">我的作品</a>
-  <a href="/logout">登出</a>
-  
-
-
-
-<a href="/painter">畫圖</a><br/>
-
+  %>
+  <div class="options"><a href="/personal"><img class="btn" src="assets/images/arts_btn.png"/></a>
+  <a href="/logout"><img class="btn" src="assets/images/logout_btn.png"/></a>
+<a href="/painter"><img class="btn" src="assets/images/paint_btn.png"/></a></div>
+<h3>哈囉! <%=uName%></h3>
  
 <div ng-app='img2fire'>
   <div ng-controller='base64Ctrl'>
@@ -60,6 +58,7 @@ if(uName == ""){
   <script>
   console.log("ACCCC: <%=uAccount%>");
   </script>
+
 
 
 

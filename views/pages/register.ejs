@@ -33,10 +33,12 @@
 	}
 </SCRIPT>
 <form name="reg" action="/rSuccess" method="post">
+<table>
 	<input type="hidden" name="num" value=<%= Number(users.length) %>>
-	帳號：<input type="text" name="uA">
-	密碼：<input type="password" name="uP">
-	再次輸入密碼：<input type="password" name="uP2">
-	用戶名：<input type="text" name="uN">
-	<input type="button" value="註冊" onClick="check()" />
+	<tr><td>帳號：</td><td><input type="text" name="uA"></td></tr>
+	<tr><td>密碼：</td><td><input type="password" name="uP"></td></tr>
+	<tr><td>再次輸入密碼：</td><td><input type="password" name="uP2"></td></tr>
+	<tr><td>用戶名：</td><td><input type="text" name="uN"></td></tr>
+</table>
+	<input class="sign" type="button" value="註冊" onClick="check()" /><br/>
 </form>

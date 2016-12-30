@@ -41,18 +41,18 @@ img{
 </style>
 <%
 if(uName == ""){
-  %><a href="/register">註冊</a> 
-<a href="/login">登入</a><br/><%
+  %><a href="/register"><img class="btn" src="assets/images/sign_btn.png"/></a> 
+<a href="/login"><img class="btn" src="assets/images/login_btn.png"/></a><br/><%
 }else{
   %><h3>哈囉! <%=uName%></h3>
-  <a href="/">回首頁</a>
+  <a href="/"><img class="btn" src="assets/images/index_btn.png"/></a>
   <%
 }
 
 %>
 <a href="/painter">畫圖</a><br/>
 
-<h3>NAME: <%=uName%></h3> 
+
 <div ng-app='img2fire'>
   <div ng-controller='base64Ctrl'>
     <div class="container-fluid">

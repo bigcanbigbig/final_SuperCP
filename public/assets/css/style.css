@@ -42,15 +42,23 @@ table {
 	border-spacing: 0;
 }
 body{
+	margin: 0 auto;
 	width: 1000px;
 	font-family: 'Baloo Thambi', cursive,'微軟正黑體';
 	text-align: center;
-	font-size: 24px;
+	font-size: 20px;
 	min-height: 100%;
+	line-height: 28px;
 }
 h1{
 	color: #404040;
-	text-shadow: 3px 2px #1E1E1E;
+	font-size: 28px;
+	font-weight: bold;
+}
+h3{
+	color: #404040;
+	font-size: 24px;
+	margin-bottom: 20px;
 }
 .header,.footer{
   height: 100px;
@@ -64,13 +72,14 @@ h1{
 .footer{
 	font-size: 18px;
 }
+
 table{
 	border: 2px solid white;
 	border-collapse:collapse;
-	width: 600px;
-	margin-left: 100px;
+	margin:0 auto;
 }
 td,th{
+	vertical-align: middle;
 	border: 1px solid white;
 }
 a{
@@ -95,6 +104,18 @@ input[type=submit]{
 	font-size: 24px;
 	margin-top: 20px;
 }
+input[type=submit].export,input[type=button].sign{
+	background-color: #404040;
+	color: white;
+	width: 200px;
+	height: 40px;
+	text-align: center;
+	font-family: Georgia,'微軟正黑體';
+	border-width: 0px;
+	font-size: 16px;
+	margin-top: 20px;
+}
+
 
 span{
 	color: #FF1462;
@@ -118,4 +139,11 @@ img{
 }
 .clear{
 	clear: both;
+}
+.btn{
+  width:80px;
+  height:80px;
+}
+.options{
+	margin-bottom: 30px;
 }
