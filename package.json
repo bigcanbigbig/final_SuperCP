@@ -1,5 +1,5 @@
 {
-  "name": "new-board",
+  "name": "final_SuperCP",
   "version": "1.0.0",
   "description": "",
   "main": "board.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elmas87532/new-board.git"
+    "url": "git+https://github.com/bigcanbigbig/final_SuperCP.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/elmas87532/new-board/issues"
+    "url": "https://github.com/bigcanbigbig/final_SuperCP.git"
   },
-  "homepage": "https://github.com/elmas87532/new-board#readme",
+  "homepage": "https://github.com/bigcanbigbig/final_SuperCP.git",
   "dependencies": {
     "angular": "^1.6.0",
     "body-parser": "^1.15.2",
