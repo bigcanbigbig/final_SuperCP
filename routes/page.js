@@ -21,6 +21,8 @@ firebase.database().ref('/user').once('value').then(function(snapshot) {
   
 });
 
+
+
 //註冊帳號
 function register(num, uAccount, uPwd, uName) {
     var point=0;
@@ -165,7 +167,7 @@ exports.personal = function(req, res) {
 };
 //作品頁
 exports.work =function(req, res) {
-  var id = req.param('id').toString();
+  var id = req.param('id');
   var author=req.param('author');
   firebase.database().ref('/user').once('value').then(function(snapshot) {
     users=snapshot.val();
@@ -173,16 +175,22 @@ exports.work =function(req, res) {
   var authorAccount=users[author].uAccount;
   var authorName=users[author].uName;
   var img= new Array();
-  firebase.database().ref('/images/'+authorAccount).child(id).once(id).then(function(snapshot) {
-    img=snapshot.val();
-    var timestamp = parseInt(img.date);
-    var myDate = new Date(timestamp);
-    res.render('pages/work',{
-        img: img.base64,
-        authorName: authorName,
-        authorId: author,
-        date: myDate
-    });
-  });
-  
+  firebase.database().ref('/images/'+authorAccount).orderByValue().on("value", function(snapshot) {
+   snapshot.forEach(function(snapshot) {
+      var id2=snapshot.key;
+      console.log()
+      if(1){
+        console.log('hi');
+        //img=snapshot.val();
+        /*var timestamp = parseInt(img.date);
+        var myDate = new Date(timestamp);
+        res.render('pages/work',{
+            img: img.base64,
+            authorName: authorName,
+            authorId: author,
+            date: myDate
+        });*/
+      }
+   });
+  });  
 }
