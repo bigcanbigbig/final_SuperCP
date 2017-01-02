@@ -1,0 +1,44 @@
+* {
+	font-family: '微软雅黑';
+	font-size:12px;
+}
+
+canvas {
+	box-shadow: 2px 2px 5px #404040;
+}
+body{
+	width: 870px;
+}
+
+.container_pencil{
+	cursor: url(images/PencilToolCursor.gif), pointer;
+}
+
+.container_eraser{
+	cursor: url(images/test.png), pointer;
+}
+
+.container_font{
+	cursor:crosshair;
+}
+.speed {
+	top: 15px;
+}
+
+.ui-selectmenu-text {
+	font-size: 12px;
+}
+fieldset{
+	border: 0px;
+	color: white;
+}
+legend{
+	color: white;
+	font-weight: bold;
+}
+.toolbar{
+	padding: 10px;
+	width: 860px;
+	background-color: #404040;
+	box-shadow: 2px 2px 2px #404040;
+}
