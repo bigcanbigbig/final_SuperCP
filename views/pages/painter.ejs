@@ -150,8 +150,13 @@ var file = event.target.files[0];
   console.log("width:"+height);
   context.drawImage(image,dx,dy,width,height);
   dx += width;
-  if(dx >= 800){
+  if(dx >= 800){   
+  dx = 0;
   dy += 200;
+  if(dy >= 400){
+      dx =0;
+      dy =0;
+    }
   }
 
   console.log("dx:"+dx);
@@ -285,13 +290,17 @@ var file = event.target.files[0];
 
 //---------------------------------輸出圖片--------------------
 //寫死user---->testABC
-/*
+
 var uName = "<%=uName%>";
 var uAccount = "<%=uAccount%>";
 
 
+
+
+
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
+    var myCanvas = document.getElementById('myCanvas');
 
       if(uAccount == ""){
         alert("請先登入!");
@@ -303,9 +312,8 @@ var uAccount = "<%=uAccount%>";
         console.log(wContent);
         e.preventDefault();
           //window.open(lc.getImage().toDataURL());
-          console.log("NAURLLLLL:"+lc.getImage());
-          console.log("URLLLLL:"+lc.getImage().toDataURL());
-        $('#wPic').val(lc.getImage().toDataURL());
+          console.log("NAURLLLLL:"+myCanvas.toDataURL());
+        $('#wPic').val(myCanvas.toDataURL());
         $( "#work" ).submit();
 
         /*var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
@@ -314,7 +322,7 @@ var uAccount = "<%=uAccount%>";
 
        img.push({
           date: Firebase.ServerValue.TIMESTAMP,
-          base64: lc.getImage().toDataURL(),
+          base64: myCanvas.toDataURL(),
           uName: "<%=uName%>",
           wName: wName,
           uId: <%=uNum%>,
@@ -322,18 +330,22 @@ var uAccount = "<%=uAccount%>";
        });
        index_img.push({
           date: Firebase.ServerValue.TIMESTAMP,
-          base64: lc.getImage().toDataURL(),
+          base64: myCanvas.toDataURL(),
           uName: "<%=uName%>",
           wName: wName,
           uId: <%=uNum%>,
           wContent: wContent
        });*/
       }
-      
+      //setTimeout(toPersonal(),10000);
 
 });
 
-window.location = "/personal";
-*/
+function toPersonal(){
+  window.location = "/personal";
+}
+
+
+
 
 </script>
