@@ -61,7 +61,7 @@ if(uName == ""){
       <ul>
       <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
         <img ng-src="{{img.base64}}">
-        <a  href="/work?id={img.uId}">{{img.wName}}</a>
+        <a href="/work?id={{img.uId}}">{{img.wName}}</a>
         <a class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
       </li>
       </ul>
@@ -79,21 +79,27 @@ var img2fire = angular.module('img2fire', ['firebase', 'angular.filter']);
 img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
   
 
-  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
+  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/"+uAccount);
   $scope.imgs = $firebaseArray(img);
+
+  var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
   
 
   $scope.deleteimg = function(imgid) {
-    var r = confirm("Do you want to remove this image ?");
-    if (r == true) {
-      $scope.imgs.forEach(function(childSnapshot) {
-        if (childSnapshot.$id == imgid) {
-            $scope.imgs.$remove(childSnapshot).then(function(ref) {
-              ref.key() === childSnapshot.$id; // true
-            });
-        }
-      });
+    if (imgid==1){
+     var r = alert("You can't delete this image!");
+    }else{
+      var r = confirm("Do you want to remove this image ?");
+      if (r == true) {
+        $scope.imgs.forEach(function(childSnapshot) {
+          if (childSnapshot.$id == imgid) {
+              $scope.imgs.$remove(childSnapshot).then(function(ref) {
+                ref.key() === childSnapshot.$id; // true
+              });
+          }
+        });
+      }
     }
   }
 
