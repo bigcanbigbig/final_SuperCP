@@ -3,7 +3,7 @@ var img2fire = angular.module('img2fire', ['firebase', 'angular.filter']);
 
 img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
 
-  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/total");
+  var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
   $scope.imgs = $firebaseArray(img);
 
   var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];

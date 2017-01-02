@@ -273,12 +273,16 @@ var file = event.target.files[0];
 
 ------------------------------------------------------------------
 
-<form class="controls export" name="upload-img-work">
-<table>
-<tr><td>取個名字：</td><td><input type="text" name="img-work-name" id="img-work-name" size="54"/></td><tr>
-<tr><td>加點敘述：</td><td><textarea rows="4" cols="50" name="img-work-content" id="img-work-content" form="upload-img-work"></textarea></td><tr>
-</table>
-  <input class="export" type="submit" data-action="export-as-png" value="Export as PNG">
+<form class="controls export" name="work" id="work" action="/pResult" method="post">
+  <table>
+    <tr><td>取個名字：</td><td><input type="text" name="wName" id="wName" size="54"/></td><tr>
+    <tr><td>加點敘述：</td><td><textarea rows="4" cols="50" name="wContent" id="wContent" form="work"></textarea></td><tr>
+  </table>
+  <input type="hidden" name="wPic" id="wPic" value="" />
+  <input type="hidden" name="uNum" value="<%=uNum%>" />
+  <input type="hidden" name="uName" value="<%=uName%>" />
+  <input type="hidden" name="uAccount" value="<%=uAccount%>" />
+  <input class="export" type="button" data-action="export-as-png" value="Export as PNG">
 </form>
 
 <script type="text/javascript">
@@ -294,40 +298,42 @@ var uAccount = "<%=uAccount%>";
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
 
-    if(uAccount == ""){
-      alert("請先登入!");
-    }else{
+      if(uAccount == ""){
+        alert("請先登入!");
+      }else{
 
-    var wName = document.getElementById('img-work-name').value;
-    var wContent = document.getElementById('img-work-content').value;
-    console.log(wName);
-    console.log(wContent);
-    e.preventDefault();
-      //window.open(lc.getImage().toDataURL());
-      console.log("NAURLLLLL:"+lc.getImage());
-      console.log("URLLLLL:"+lc.getImage().toDataURL());
+        var wName = document.getElementById('wName').value;
+        var wContent = document.getElementById('wContent').value;
+        console.log(wName);
+        console.log(wContent);
+        e.preventDefault();
+          //window.open(lc.getImage().toDataURL());
+          console.log("NAURLLLLL:"+lc.getImage());
+          console.log("URLLLLL:"+lc.getImage().toDataURL());
+        $('#wPic').val(lc.getImage().toDataURL());
+        $( "#work" ).submit();
+
+        /*var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
+         var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/total");
 
 
-     var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
-     var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/total");
-
-   img.push({
-      date: Firebase.ServerValue.TIMESTAMP,
-      base64: lc.getImage().toDataURL(),
-      uName: "<%=uName%>",
-      wName: wName,
-      uId: <%=uNum%>,
-      wContent: wContent
-   });
-   index_img.push({
-      date: Firebase.ServerValue.TIMESTAMP,
-      base64: lc.getImage().toDataURL(),
-      uName: "<%=uName%>",
-      wName: wName,
-      uId: <%=uNum%>,
-      wContent: wContent
-   });
-    }
+       img.push({
+          date: Firebase.ServerValue.TIMESTAMP,
+          base64: lc.getImage().toDataURL(),
+          uName: "<%=uName%>",
+          wName: wName,
+          uId: <%=uNum%>,
+          wContent: wContent
+       });
+       index_img.push({
+          date: Firebase.ServerValue.TIMESTAMP,
+          base64: lc.getImage().toDataURL(),
+          uName: "<%=uName%>",
+          wName: wName,
+          uId: <%=uNum%>,
+          wContent: wContent
+       });*/
+      }
       
 
 });

@@ -1,6 +1,12 @@
-<a href="/">首頁</a>
-<a href="/personal">我的作品</a>
-<a href="/logout">登出</a>
+<%if(uNum == ""){
+  %><div class="options"><a href="/register"><img class="btn" src="assets/images/sign_btn.png"/></a> 
+<a href="/login"><img class="btn" src="assets/images/login_btn.png"/></a></div><%
+}else{
+  %>
+  <div class="options"><a href="/personal"><img class="btn" src="assets/images/arts_btn.png"/></a>
+  <a href="/logout"><img class="btn" src="assets/images/logout_btn.png"/></a>
+  <a href="/painter"><img class="btn" src="assets/images/paint_btn.png"/></a></div><%
+ }%>
 
 <img src="<%=img%>">
 <%=date%>
