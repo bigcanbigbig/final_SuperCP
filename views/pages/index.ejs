@@ -1,12 +1,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
-<script type="text/javascript" src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
-<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-<script type="text/javascript" src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+<script type="text/javascript" src="//fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
+<script type="text/javascript" src="//cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<script type="text/javascript" src="//cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 <script type="text/javascript" src="assets/js/uploadimg.js"></script>
 <style>
 p{
@@ -43,6 +43,7 @@ if(uName == ""){
       <hr />
       <ul>
       <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+        <form action="/work" method="post" name="work" id="work">
         <a href="work/?id={{img.$id}}&author={{img.uId}}"><img ng-src="{{img.base64}}"></a>
         <a class="btn btn-danger btn-block" href="personal/?id={{img.uId}}">{{img.uName}}</a>
       </li>
