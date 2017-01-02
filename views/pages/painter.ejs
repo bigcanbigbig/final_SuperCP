@@ -8,20 +8,37 @@
 <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <script type="text/javascript" src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
+
+<script type="text/javascript" src="assets/jquery-ui-1.11.0.custom/external/jquery/jquery-1.11.0.js"></script>
+<link rel="stylesheet" href="assets/jquery-ui-1.11.0.custom/jquery-ui.css" />
+<link rel="stylesheet" href="assets/jquery-ui-1.11.0.custom/jquery-ui.structure.css" />
+<link rel="stylesheet" href="assets/colorpicker-master/jquery.colorpicker.css" />
+<link rel="stylesheet" href="assets/jquery-ui-1.11.0.custom/jquery-ui.theme.css" />
+<script type="text/javascript" src="assets/jquery-ui-1.11.0.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/js/anyLine.js"></script>
+<script type="text/javascript" src="assets/colorpicker-master/jquery.colorpicker.js"></script>
+<script type="text/javascript" src="assets/colorpicker-master/parts/jquery.ui.colorpicker-rgbslider.js"></script>
+<script type="text/javascript" src="assets/js/json2.js"></script>
+<script type="text/javascript" src="assets/js/canvas.js"></script>
+
+
 <link href="assets/css/literallycanvas.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 <style type="text/css">
-      .fs-container {
-        width: 1000px;
-        margin: auto;
-      }
+img
+    {
+        width:20px;
+        height:20px;
 
-      .literally {
-        width: 100%;
-        height: 75%;
-        position: relative;
-      }
+    }
+    .toolbar span{
+    color:black;
+    font-size:12px;2
+    font-weight:light;
+    font-family: '微軟正黑體';
+    }
+
 
     </style>
 <%
@@ -44,7 +61,7 @@ if(uName == ""){
 上傳小圖：
 <input type="file" id="canvas-up-image" accept="image/*"/>
 <input type="button" id="up-img" onclick="upImg();" value="上傳" /><br/>
-<img id="preview" src=""> //測試完後會拿掉
+
 
 
 <script>
@@ -60,21 +77,15 @@ $("#canvas-bg-image").on("change", function(event) {
   var backgroundImage = new Image();
   backgroundImage.src = arg.target.result;
   console.log('SSSSS: '+backgroundImage);
-
   console.log(backgroundImage.width);
-  var testimg = document.getElementById('testimg'); //拿掉
-  console.log("test:"+testimg); //拿掉
 
-  var canvas = document.getElementById('c');
-  var preview = document.getElementById('preview'); //拿掉
-
-
+  var canvas = document.getElementById('myCanvas');
   var width = backgroundImage.width;
   var height = backgroundImage.height;
   var context = canvas.getContext('2d');
 
-  var MAX_WIDTH = 550;
-  var MAX_HEIGHT = 400;
+  var MAX_WIDTH = 1000;
+  var MAX_HEIGHT = 550;
 
   if (width > height) {
     if (width > MAX_WIDTH) {
@@ -87,30 +98,9 @@ $("#canvas-bg-image").on("change", function(event) {
       height = MAX_HEIGHT;
     }
   }
-
-
-    var dataUrl = canvas.toDataURL('image/jpeg', quality);
-    preview.src = dataUrl;
-
-    var resizedImg = new Image();
-    resizedImg.src = dataUrl;
-    console.log("RRR:"+resizedImg.src);
-
-
-    lc = LC.init(
-        document.getElementById('lc'),
-        {
-          backgroundShapes: [
-            LC.createShape(
-              'Image', {x: 20, y: 20, image: backgroundImage, scale: 2}),
-            LC.createShape(
-              'Text', {
-                x: 200, y: 200, text: "I am in the background",
-                font: "bold 12px Helvetica"
-              })
-          ]
-        });
-
+  console.log("width:"+width);
+  console.log("width:"+height);
+  context.drawImage(backgroundImage,0,0,backgroundImage.width,backgroundImage.height,0,0,900,400);
 
 
   };
@@ -118,70 +108,165 @@ $("#canvas-bg-image").on("change", function(event) {
 });
 
 
-
-
 </script>
 
-
-
-<script src="./dist/lrz.bundle.js"></script>
 <script>
 
 /*-----------------上船小圖---------------------*/
+var dx = 0;
+var dy = 0;
 $("#canvas-up-image").on("change", function(event) {
 
-
-
-  var file = event.target.files[0];
+var file = event.target.files[0];
   var reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = function(arg) {
 
-  var upImage = new Image();
-  upImage.src = arg.target.result;
-  console.log('sssss');
-  console.log(upImage.src);
-  console.log(upImage.width);
-  lc.saveShape(LC.createShape('Image', {x: 100, y: 100, image: upImage}));
+  var image = new Image();
+  image.src = arg.target.result;
+  console.log('SSSSS: '+image);
+  console.log(image.width);
+
+  var canvas = document.getElementById('myCanvas');
+  var width = image.width;
+  var height = image.height;
+  var context = canvas.getContext('2d');
+
+  var MAX_WIDTH = 200;
+  var MAX_HEIGHT = 200;
+
+  if (width > height) {
+    if (width > MAX_WIDTH) {
+      height *= MAX_WIDTH / width;
+      width = MAX_WIDTH;
+    }
+  } else {
+    if (height > MAX_HEIGHT) {
+      width *= MAX_HEIGHT / height;
+      height = MAX_HEIGHT;
+    }
+  }
+  console.log("width:"+width);
+  console.log("width:"+height);
+  context.drawImage(image,dx,dy,width,height);
+  dx += width;
+  if(dx >= 800){
+  dy += 200;
+  }
+
+  console.log("dx:"+dx);
+  console.log("dy:"+dy); 
+
 
   };
+  
 
 });
 
 
-
-
-
 </script>
 
-<div class="fs-container">
-      <div id="lc"></div>
-    </div>
-
-
-    <!-- you really ought to include react-dom, but for react 0.14 you don't strictly have to. -->
-    <script src="assets/js/react-0.14.3.js"></script>
-    <script src="assets/js/literallycanvas.js"></script>
-
-    <script type="text/javascript">
-      var lc = LC.init(document.getElementById("lc"), {
-        imageURLPrefix: 'assets/plugins/lc-images',
-        toolbarPosition: 'bottom',
-        defaultStrokeWidth: 2,
-        strokeWidths: [1, 2, 3, 5, 30]
-      });
-
-      console.log(lc);
-
-      $("#lc canvas").attr("id","c");
+------------------------------------------------------------------
 
 
 
-    </script>
+<div class="toolbar" style="font-size:14px;"> 
+     <fieldset style="float:left;width:250px;">
+          <legend>工具</legend>
+        <div id="toolsOptions">
+          <input type="radio" id="tools_pencil" name="toolsOption" checked="checked"><label for="tools_pencil">畫筆</label> &nbsp;
+          <input type="radio" id="tools_eraser" name="toolsOption" ><label for="tools_eraser">橡皮擦</label> &nbsp;
+          <input type="radio" id="tools_trash" name="toolsOption"><label  for="tools_trash">清空</label>
+          <div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;"><span>
+            <button id="tools_save">save</button>&nbsp;&nbsp;
+            <button id="tools_undo">undo</button>&nbsp;&nbsp;
+            <button id="tools_redo">redo</button>
+          </span></div>
+        </div>
+
+      </fieldset>
+      <fieldset style="float:left; width:180px;">
+        <legend>插入</legend>
+        <div><span>
+          <input type="radio" id="tools_line" name="toolsOption"><label for="tools_line">直線</label>
+          <input type="radio" id="tools_circle" name="toolsOption"><label for="tools_circle">文字</label>
+          <div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;"></div>
+        </span></div>
+      </fieldset>
+      <fieldset style="float:left;width:180px;">
+          <legend>線條設置</legend>
+          <span style="float: left;margin-top: 6px;">線條粗細: </span>
+               <select id="penWidth" >
+                   <option value="1" selected>1px</option>
+                   <option value="2">2px</option>
+                   <option value="4">4px</option>
+                   <option value="6">6px</option>
+                   <option value="8">8px</option>
+                   <option value="12">12px</option>
+                   <option value="14">14px</option>
+                   <option value="16">16px</option>
+                   <option value="18">18px</option>
+               </select>
+              <div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;">
+          <span>邊框色:<input id="colorpicker-popup" type="text"  value="000000" style="width: 72px;display:none; "></span>&nbsp;
+          <span>填充色:<input id="colorpicker-popup2" type="text"  value="fe9810" style="width: 72px;display:none; "></span>
+          </div>
+       </fieldset>
+      <fieldset style="float:left;width:220px;">
+          <legend>字體設置</legend>
+          <span><span style="float: left;margin-top: 6px;">字體大小 :&nbsp;</span>
+              <select id="fontSize"  >
+                     <option value="8px" selected>8px</option>
+                     <option value="10px">10px</option>
+                     <option value="12px">12px</option>
+                     <option value="14px">14px</option>
+                     <option value="16px">16px</option>
+                     <option value="18px">18px</option>
+                     <option value="20px">20px</option>
+                     <option value="22px">22px</option>
+                     <option value="24px">24px</option>
+                     <option value="26px">26px</option>
+                     <option value="28px">28px</option>
+                     <option value="30px">30px</option>
+                     <option value="32px">32px</option>
+                     <option value="34px">34px</option>
+                     <option value="36px">36px</option>
+               </select>
+               </span>
+               <br/>
+          <span><span style="float: left;margin-top: 6px;">字體選擇 :&nbsp;</span>              
+              <select id="fontType" style="top:20px;" >
+                     <option value="宋体" >宋體</option>
+                     <option value="微软雅黑">微軟雅黑</option>
+                     <option value="仿宋">仿宋</option>
+                     <option value="Arial" selected>Arial</option>
+                     <option value="Consolas">Consolas</option>
+               </select>
+          </span>
+          <span style="font-weight:bold;"><input type="checkbox" id="boldOption" name="fontOption"><label for="boldOption">B</label></span>
+          <span style="font-style: italic;"><input type="checkbox" id="italicOption" name="italicOption"><label for="italicOption">I</label></span>
+       </fieldset>
+       
+       <div style="clear:both;"></div>
+  </div>
+   
+   <div style="position:relative;" id="container">
+     <div id="temp" style="border:1px solid gray;width:1px;height:1px;position:absolute;display:none;"></div>
+  
+  <canvas id="myCanvas" width="880" height="400" class="container_pencil">
+    
+  </canvas>
+  </div>
+
+<span id="show" style="display:none;"></span>
 
 
 
 
+
+
+
+------------------------------------------------------------------
 
 <form class="controls export" name="work" id="work" action="/pResult" method="post">
   <table>
@@ -197,8 +282,10 @@ $("#canvas-up-image").on("change", function(event) {
 
 <script type="text/javascript">
 
+
 //---------------------------------輸出圖片--------------------
 //寫死user---->testABC
+/*
 var uName = "<%=uName%>";
 var uAccount = "<%=uAccount%>";
 
@@ -245,5 +332,8 @@ var uAccount = "<%=uAccount%>";
       
 
 });
+
+window.location = "/personal";
+*/
 
 </script>

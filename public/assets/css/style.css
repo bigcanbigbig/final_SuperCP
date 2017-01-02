@@ -147,3 +147,47 @@ img{
 .options{
 	margin-bottom: 30px;
 }
+#paintBoard{
+	box-shadow: 3px 3px 3px #888888;
+}
+
+
+
+canvas {
+	box-shadow: 2px 2px 5px #404040;
+	width: 1000px;
+	height: 550px;
+}
+
+.container_pencil{
+	cursor: url(asstes/images/PencilToolCursor.gif), pointer;
+}
+
+.container_eraser{
+	cursor: url(asstes/images/test.png), pointer;
+}
+
+.container_font{
+	cursor:crosshair;
+}
+.speed {
+	top: 15px;
+}
+
+.ui-selectmenu-text {
+	font-size: 12px;
+}
+fieldset{
+	border: 0px;
+	color: white;
+}
+legend{
+	color: white;
+	font-weight: bold;
+}
+.toolbar{
+	padding: 10px;
+	width: 980px;
+	background-color: #404040;
+	box-shadow: 2px 2px 2px #404040;
+}
