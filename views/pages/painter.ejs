@@ -113,6 +113,8 @@ $("#canvas-bg-image").on("change", function(event) {
 <script>
 
 /*-----------------上船小圖---------------------*/
+var dx = 0;
+var dy = 0;
 $("#canvas-up-image").on("change", function(event) {
 
 var file = event.target.files[0];
@@ -146,7 +148,14 @@ var file = event.target.files[0];
   }
   console.log("width:"+width);
   console.log("width:"+height);
-  context.drawImage(image,0,0,width,height);
+  context.drawImage(image,dx,dy,width,height);
+  dx += width;
+  if(dx >= 800){
+  dy += 200;
+  }
+
+  console.log("dx:"+dx);
+  console.log("dy:"+dy); 
 
 
   };
