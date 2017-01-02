@@ -150,8 +150,13 @@ var file = event.target.files[0];
   console.log("width:"+height);
   context.drawImage(image,dx,dy,width,height);
   dx += width;
-  if(dx >= 800){
+  if(dx >= 800){   
+  dx = 0;
   dy += 200;
+  if(dy >= 400){
+      dx =0;
+      dy =0;
+    }
   }
 
   console.log("dx:"+dx);
@@ -281,7 +286,7 @@ var file = event.target.files[0];
 
 //---------------------------------輸出圖片--------------------
 //寫死user---->testABC
-/*
+
 var uName = "<%=uName%>";
 var uAccount = "<%=uAccount%>";
 
@@ -328,6 +333,6 @@ var uAccount = "<%=uAccount%>";
 });
 
 window.location = "/personal";
-*/
+
 
 </script>
