@@ -339,13 +339,13 @@ var uNum = "<%=uNum%>";
         //$('#wPic').val(myCanvas.toDataURL());
         //$( "#work" ).submit();
 
-        saveWork(wName, wContent, myCanvas.toDataURL(), uNum, uAccount, uName, toIndex);
+        saveWork(wName, wContent, myCanvas.toDataURL(), uNum, uAccount, uName, toPersonal);
       }
 
 });
 
-function toIndex(){
-  window.location = "/";
+function toPersonal(){
+  window.location = "/personal/?id=<%=uNum%>";
 }
 
 function saveWork(wName, wContent, wPic, uNum, uAccount, uName, callback){
