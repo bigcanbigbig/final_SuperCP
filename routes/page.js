@@ -19,6 +19,16 @@ var users= new Array();
 firebase.database().ref('/user').once('value').then(function(snapshot) {
   users=snapshot.val();
 });
+
+var images= new Array();
+var imgLen = 0;
+  firebase.database().ref('/images').once('value').then(function(snapshot) {
+    images=snapshot.val();
+    imgLen = images.length;
+  });
+
+
+
 //讀用戶images
 function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
   var images= new Array();
@@ -194,13 +204,15 @@ exports.painter = function(req, res) {
     res.render('pages/painter',{
       uName: users[req.session.uNum].uName,
       uNum: req.session.uNum,
-      uAccount: users[req.session.uNum].uAccount
+      uAccount: users[req.session.uNum].uAccount,
+      imgLen: imgLen
     });
   }else{
     res.render('pages/painter',{
       uName: "",
       uNum: "",
-      uAccount: ""
+      uAccount: "",
+      imgLen: 0
     });
   }
 };
