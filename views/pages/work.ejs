@@ -1,11 +1,16 @@
+<script src="../public/assets/js/jquery.js"></script>
+<script src="../public/assets/js/jquery.ui.widget.js"></script>
+<script src="../public/assets/js/jquery.fileupload.js"></script>
+<link rel="stylesheet" href="../public/assets/css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
 <%if(uNum == ""){
-  %><div class="options"><a href="/register"><img class="btn" src="assets/images/sign_btn.png"/></a> 
-<a href="/login"><img class="btn" src="assets/images/login_btn.png"/></a></div><%
+  %><div class="options"><a href="/register"><img class="btn" src="../public/assets/images/sign_btn.png"/></a> 
+<a href="/login"><img class="btn" src="../public/assets/images/login_btn.png"/></a></div><%
 }else{
   %>
-  <div class="options"><a href="/personal"><img class="btn" src="assets/images/arts_btn.png"/></a>
-  <a href="/logout"><img class="btn" src="assets/images/logout_btn.png"/></a>
-  <a href="/painter"><img class="btn" src="assets/images/paint_btn.png"/></a></div><%
+  <div class="options"><a href="/personal"><img class="btn" src="../public/assets/images/arts_btn.png"/></a>
+  <a href="/logout"><img class="btn" src="../public/assets/images/logout_btn.png"/></a>
+  <a href="/painter"><img class="btn" src="../public/assets/images/paint_btn.png"/></a></div><%
  }%>
 
 <img src="<%=img%>">

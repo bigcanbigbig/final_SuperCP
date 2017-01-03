@@ -28,7 +28,8 @@ app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 3000));
 
 //設定預設指定目錄
-app.use( static( path.join( __dirname, 'public' )));
+//app.use( static( path.join( __dirname, '/public' )));
+app.use('/public', express.static(__dirname + '/public'));
 //session
 app.use(session({secret : "bigcanisgood"}));
 app.use(function(req, res, next){
