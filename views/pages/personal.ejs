@@ -108,6 +108,8 @@ img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
   var img = new Firebase("https://supercp-a8e9e.firebaseio.com/"+uAccount);
   $scope.imgs = $firebaseArray(img);
 
+  var index_img =  new Firebase("https://supercp-a8e9e.firebaseio.com/images");
+
   var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
   
@@ -125,8 +127,17 @@ img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
               });
           }
         });
+        $scope.index_img.forEach(function(childSnapshot) {
+          if (childSnapshot.$id == img.imageId) {
+              $scope.index_img.$remove(childSnapshot).then(function(ref) {
+                ref.key() === childSnapshot.$id; // true
+              });
+          }
+        });
       }
     }
+
+
   }
 
 });

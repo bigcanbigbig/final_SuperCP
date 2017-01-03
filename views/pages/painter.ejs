@@ -306,14 +306,6 @@ var file = event.target.files[0];
 
 //---------------------------------輸出圖片--------------------
 
-/*if(imgLen == undefined){
-  var imgLen = "<%=imgLen%>";
-  console.log("UNDEFINED");
-  console.log(imgLen);
-}else{
-  console.log(imgLen);
-}*/
-
 var uName = "<%=uName%>";
 var uAccount = "<%=uAccount%>";
 var uNum = "<%=uNum%>";
@@ -347,7 +339,7 @@ var uNum = "<%=uNum%>";
 
         
       }
-      //setTimeout(toPersonal(),10000);
+      setTimeout(toPersonal(),8000);
 
 });
 
@@ -356,11 +348,13 @@ function toPersonal(){
 }
 
 function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
+ var imgId = undefined;
   var images= new Array();
   firebase.database().ref('/images').once('value').then(function(snapshot) {
     images=snapshot.val();
     var imgNum = images.length;
     console.log("IMAGELEN:"+imgNum);
+    imgId = imgNum;
    
     firebase.database().ref('images/'+imgNum).set({
       date: 1,
@@ -384,6 +378,7 @@ function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
       uAccount: uAccount,
       wName: wName,
       uId: uNum,
+      imgId: imgId,
       wContent: wContent
     });
   });
