@@ -220,6 +220,7 @@ exports.work =function(req, res) {
     var myDate = new Date(img[id].date);
     var finalDate = myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate();
     res.render('pages/work',{
+      id: id,
       authorId: author,
       authorName: authorName,
       img: img[id].base64,

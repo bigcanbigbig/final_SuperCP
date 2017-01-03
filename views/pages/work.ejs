@@ -18,6 +18,9 @@
 	float:left;
 	text-align:left;
 }
+img.work-pic{
+	cursor:default;
+}
 </style>
 <%if(uNum == ""){
   %><div class="options"><a href="/register"><img class="btn" src="../public/assets/images/sign_btn.png"/></a> 
@@ -27,16 +30,21 @@
   <div class="options"><a href="/personal/?id=<%=uNum%>"><img class="btn" src="../public/assets/images/arts_btn.png"/></a>
   <a href="/logout"><img class="btn" src="../public/assets/images/logout_btn.png"/></a>
   <a href="/painter"><img class="btn" src="../public/assets/images/paint_btn.png"/></a></div><%
- }%>
-<div class="work">
-	<div class="work-img">
-		<img src="<%=img%>">
-	</div>
-	<div class="work-info">
-		作品名稱：<%=wName%><br/>
-		作品描述：<%=wContent%><br/>
-		作者：<a href="../personal/?id=<%=authorId%>"><%=authorName%></a><br/>
-		日期：<%=date%>
-	</div>
-	<div class="clear"></div>
-</div>
+}
+if(id==1){%>
+	<img class="work-pic" src="<%=img%>">
+	<h3>DRAWING MAKES YOUR LIFE BETTER!</h3><%
+}else{%>
+	<div class="work">
+		<div class="work-img">
+			<img class="work-pic" src="<%=img%>">
+		</div>
+		<div class="work-info">
+			作品名稱：<%=wName%><br/>
+			作品描述：<%=wContent%><br/>
+			作者：<a href="../personal/?id=<%=authorId%>"><%=authorName%></a><br/>
+			日期：<%=date%>
+		</div>
+		<div class="clear"></div>
+	</div><%
+}%>
