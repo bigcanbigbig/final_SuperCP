@@ -86,9 +86,6 @@ function loginCheck(uAccount, uPwd){
   var notExit=0;
   var exit;
   for (var i=1;i<users.length;i++){
-    console.log(i);
-    console.log(uAccount);
-    console.log(users[i].uAccount);
     if (uAccount!=users[i].uAccount){
       notExit++;
     }else{
