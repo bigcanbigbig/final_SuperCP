@@ -57,6 +57,11 @@ if(uName == ""){
 }%>
   <script>
   console.log("ACCCC: <%=uAccount%>");
+  var users = new Array();
+  users = <%=users%>;
+  for(var i=0;i<users.length;i++){
+  console.log(users[i].uAccount);
+  }
   </script>
 
 

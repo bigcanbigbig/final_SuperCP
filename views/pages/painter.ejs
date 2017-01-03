@@ -273,7 +273,7 @@ var file = event.target.files[0];
 
 ------------------------------------------------------------------
 
-<form class="controls export" name="work" id="work" action="/pResult" method="post">
+<form class="controls export" name="work" id="work">
   <table>
     <tr><td>取個名字：</td><td><input type="text" name="wName" id="wName" size="54"/></td><tr>
     <tr><td>加點敘述：</td><td><textarea rows="4" cols="50" name="wContent" id="wContent" form="work"></textarea></td><tr>
@@ -285,17 +285,38 @@ var file = event.target.files[0];
   <input class="export" type="button" data-action="export-as-png" value="Export as PNG">
 </form>
 
+
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+<script>
+
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+   apiKey: "AIzaSyA33Jnuyt58rnNaddr_O8YmsVmrAn1OmhE",
+   authDomain: "supercp-a8e9e.firebaseapp.com",
+   databaseURL: "https://supercp-a8e9e.firebaseio.com/",
+   storageBucket: "supercp-a8e9e.appspot.com"
+ };
+  firebase.initializeApp(config);
+
+</script>
+
 <script type="text/javascript">
 
 
 //---------------------------------輸出圖片--------------------
-//寫死user---->testABC
+
+/*if(imgLen == undefined){
+  var imgLen = "<%=imgLen%>";
+  console.log("UNDEFINED");
+  console.log(imgLen);
+}else{
+  console.log(imgLen);
+}*/
 
 var uName = "<%=uName%>";
 var uAccount = "<%=uAccount%>";
-
-
-
+var uNum = "<%=uNum%>";
 
 
     console.log('gggg');
@@ -313,29 +334,18 @@ var uAccount = "<%=uAccount%>";
         e.preventDefault();
           //window.open(lc.getImage().toDataURL());
           console.log("NAURLLLLL:"+myCanvas.toDataURL());
-        $('#wPic').val(myCanvas.toDataURL());
-        $( "#work" ).submit();
+    
 
-        /*var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images/"+uAccount);
-         var index_img = new Firebase("https://supercp-a8e9e.firebaseio.com/total");
+        //$('#wPic').val(myCanvas.toDataURL());
+        //$( "#work" ).submit();
+
+        saveWork(wName, wContent, myCanvas.toDataURL(), uNum, uAccount, uName);
+        console.log("wNAME: "+wName);
+        console.log("uAccount: "+uAccount);
+        console.log("uNum: "+uNum);
 
 
-       img.push({
-          date: Firebase.ServerValue.TIMESTAMP,
-          base64: myCanvas.toDataURL(),
-          uName: "<%=uName%>",
-          wName: wName,
-          uId: <%=uNum%>,
-          wContent: wContent
-       });
-       index_img.push({
-          date: Firebase.ServerValue.TIMESTAMP,
-          base64: myCanvas.toDataURL(),
-          uName: "<%=uName%>",
-          wName: wName,
-          uId: <%=uNum%>,
-          wContent: wContent
-       });*/
+        
       }
       //setTimeout(toPersonal(),10000);
 
@@ -343,6 +353,42 @@ var uAccount = "<%=uAccount%>";
 
 function toPersonal(){
   window.location = "/personal";
+}
+
+function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
+  var images= new Array();
+  firebase.database().ref('/images').once('value').then(function(snapshot) {
+    images=snapshot.val();
+    var imgNum = images.length;
+    console.log("IMAGELEN:"+imgNum);
+   
+    firebase.database().ref('images/'+imgNum).set({
+      date: 1,
+      base64: wPic,
+      uName: uName,
+      uAccount: uAccount,
+      wName: wName,
+      uId: uNum,
+      wContent: wContent
+    });
+  });
+
+  var person= new Array();
+  firebase.database().ref('/'+uAccount).once('value').then(function(snapshot) {
+    person=snapshot.val();
+    var pNum = person.length;
+    firebase.database().ref('/'+uAccount+'/'+pNum).set({
+      date: 1,
+      base64: wPic,
+      uName: uName,
+      uAccount: uAccount,
+      wName: wName,
+      uId: uNum,
+      wContent: wContent
+    });
+  });
+
+  
 }
 
 
