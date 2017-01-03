@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="../public/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
 <style>
+div.header a{
+  text-decoration:none;
+  color:#000;
+}
 .work{
 	margin:0px auto;
 	text-align:center;
@@ -18,6 +22,9 @@
 	float:left;
 	text-align:left;
 }
+img.work-pic{
+	cursor:default;
+}
 </style>
 <%if(uNum == ""){
   %><div class="options"><a href="/register"><img class="btn" src="../public/assets/images/sign_btn.png"/></a> 
@@ -30,7 +37,7 @@
  }%>
 <div class="work">
 	<div class="work-img">
-		<img src="<%=img%>">
+		<img class="work-pic" src="<%=img%>">
 	</div>
 	<div class="work-info">
 		作品名稱：<%=wName%><br/>

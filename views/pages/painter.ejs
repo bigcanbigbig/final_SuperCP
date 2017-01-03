@@ -357,7 +357,7 @@ function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
     imgId = imgNum;
    
     firebase.database().ref('images/'+imgNum).set({
-      date: 1,
+      date: Firebase.ServerValue.TIMESTAMP,
       base64: wPic,
       uName: uName,
       uAccount: uAccount,
@@ -372,7 +372,7 @@ function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
     person=snapshot.val();
     var pNum = person.length;
     firebase.database().ref('/'+uAccount+'/'+pNum).set({
-      date: 1,
+      date: Firebase.ServerValue.TIMESTAMP,
       base64: wPic,
       uName: uName,
       uAccount: uAccount,

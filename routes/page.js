@@ -27,45 +27,6 @@ var imgLen = 0;
     imgLen = images.length;
   });
 
-
-
-//讀用戶images
-function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
-  var images= new Array();
-  firebase.database().ref('/images').once('value').then(function(snapshot) {
-    images=snapshot.val();
-    var imgNum = images.length;
-    var imgRef=database.ref('images/'+imgNum);
-    imgRef.set({
-      date: 1,
-      base64: wPic,
-      uName: uName,
-      uAccount: uAccount,
-      wName: wName,
-      uId: uNum,
-      wContent: wContent
-    });
-  });
-
-  var person= new Array();
-  firebase.database().ref('/'+uAccount).once('value').then(function(snapshot) {
-    person=snapshot.val();
-    var pNum = person.length;
-    var pRef=database.ref(uAccount+'/'+pNum);
-    pRef.set({
-      date: 1,
-      base64: wPic,
-      uName: uName,
-      uAccount: uAccount,
-      wName: wName,
-      uId: uNum,
-      wContent: wContent
-    });
-  });
-
-  
-}
-
 //註冊帳號
 function register(num, uAccount, uPwd, uName) {
     var point=0;
@@ -256,11 +217,14 @@ exports.work =function(req, res) {
   var img= new Array();
   firebase.database().ref('/images').once('value').then(function(snapshot) {
     img=snapshot.val();
+    var myDate = new Date(img[id].date);
+    var finalDate = myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate();
     res.render('pages/work',{
+      id: id,
       authorId: author,
       authorName: authorName,
       img: img[id].base64,
-      date: img[id].date,
+      date: finalDate,
       wName: img[id].wName,
       wContent: img[id].wContent,
       uNum: req.session.uNum
@@ -279,11 +243,13 @@ exports.wark =function(req, res) {
   var img= new Array();
   firebase.database().ref('/'+authorAccount).once('value').then(function(snapshot) {
     img=snapshot.val();
+    var myDate = new Date(img[id].date);
+    var finalDate = myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate();
     res.render('pages/wark',{
       authorId: author,
       authorName: authorName,
       img: img[id].base64,
-      date: img[id].date,
+      date: finalDate,
       wName: img[id].wName,
       wContent: img[id].wContent,
       uNum: req.session.uNum
