@@ -351,9 +351,10 @@ function toPersonal(){
 function saveWork(wName, wContent, wPic, uNum, uAccount, uName, callback){
 
   var images= new Array();
+  var imgNum;
   firebase.database().ref('/images').once('value').then(function(snapshot) {
     images=snapshot.val();
-    var imgNum = images.length;
+    imgNum = images.length;
     console.log("IMAGELEN:"+imgNum);
    
     firebase.database().ref('images/'+imgNum).set({
@@ -379,12 +380,13 @@ function saveWork(wName, wContent, wPic, uNum, uAccount, uName, callback){
       uAccount: uAccount,
       wName: wName,
       uId: uNum,
-      wContent: wContent
+      wContent: wContent,
+      totalId: imgNum
     });
   });
 setTimeout(function () {
   callback();
-}, 7000)
+}, 10000)
 
   
 }
