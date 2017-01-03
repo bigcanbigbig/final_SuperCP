@@ -1,4 +1,4 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
@@ -7,14 +7,27 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
 <script type="text/javascript" src="//cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <script type="text/javascript" src="//cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-
+<script src="../public/assets/js/jquery.js"></script>
+<script src="../public/assets/js/jquery.ui.widget.js"></script>
+<script src="../public/assets/js/jquery.fileupload.js"></script>
+<link rel="stylesheet" href="../public/assets/css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
 <style>
 p{
   font-weight: bold;
   font-size: 2.5em;
   padding-top: 40px;
 }
-
+#delete{
+  cursor:pointer;
+}
+a.imgname{
+  font-weight: light;
+  font-size: 18px;
+  padding: 0px;
+  color: #3C3C3C;
+  cursor: default;
+}
 input[type=file] {
     margin: 0 auto;
 }
@@ -40,39 +53,52 @@ img{
 
 </style>
 <%
-if(uName == ""){
-  %><a href="/register"><img class="btn" src="assets/images/sign_btn.png"/></a> 
-<a href="/login"><img class="btn" src="assets/images/login_btn.png"/></a><br/><%
+if(uNum == ""){
+  %><a href="/register"><img class="btn" src="../public/assets/images/sign_btn.png"/></a> 
+<a href="/login"><img class="btn" src="../public/assets/images/login_btn.png"/></a><br/><%
 }else{
-  %><h3>哈囉! <%=uName%></h3>
-  <a href="/"><img class="btn" src="assets/images/index_btn.png"/></a>
+  %>
+  <a href="/"><img class="btn" src="../public/assets/images/index_btn.png"/></a>
+  <a href="/painter"><img class="btn" src="../public/assets/images/paint_btn.png"/></a><br/>
+
+
   <%
+  if(uNum==id){ %>
+    <div ng-app='img2fire'>
+      <div ng-controller='base64Ctrl'>
+        <div class="container-fluid">
+        
+        <hr />
+        <ul>
+        <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+          <a href="../wark?id={{img.$id}}&author={{img.uId}}"><img ng-src="{{img.base64}}"></a>
+          <a class="imgname">{{img.wName}}</a>
+          <a id="delete" class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
+        </li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+    </div><%
+  }else{%>
+    <div ng-app='img2fire'>
+      <div ng-controller='base64Ctrl'>
+        <div class="container-fluid">
+        
+        <hr />
+        <ul>
+        <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+          <a href="../wark?id={{img.$id}}&author={{img.uId}}"><img ng-src="{{img.base64}}"></a>
+          <a class="imgname">{{img.wName}}</a>
+        </li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+    </div><%
 }
-
-%>
-<a href="/painter"><img class="btn" src="assets/images/paint_btn.png"/></a><br/>
-
-
-<div ng-app='img2fire'>
-  <div ng-controller='base64Ctrl'>
-    <div class="container-fluid">
-      
-      <hr />
-      <ul>
-      <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
-        <img ng-src="{{img.base64}}">
-        <a href="/work?id={{img.uId}}">{{img.wName}}</a>
-        <a class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
-      </li>
-      </ul>
-      <div class="clear"></div>
-    </div>
-  </div>
-
-
+  }%>
 <script>
 
-var uAccount = "<%=uAccount%>";
+var uAccount = "<%=authorAccount%>";
 console.log(uAccount);
 
 var img2fire = angular.module('img2fire', ['firebase', 'angular.filter']);

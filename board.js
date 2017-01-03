@@ -51,6 +51,7 @@ app.get('/painter', page.painter);
 app.get('/personal', page.personal);
 app.get('/work', page.work);
 app.post('/pResult', page.pResult);
+app.get('/wark', page.wark);
 
 //session
 var sess;

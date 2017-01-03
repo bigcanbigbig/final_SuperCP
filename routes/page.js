@@ -83,13 +83,27 @@ function loginCheck(uAccount, uPwd){
   firebase.database().ref('/user').once('value').then(function(snapshot) {
     users=snapshot.val();
   });
-  for (var i=0;i<=users.length;i++){
-    if (uAccount==users[i].uAccount && uPwd==users[i].uPwd){
-      return i;
-      break;
+  var notExit=0;
+  var exit;
+  for (var i=1;i<users.length;i++){
+    console.log(i);
+    console.log(uAccount);
+    console.log(users[i].uAccount);
+    if (uAccount!=users[i].uAccount){
+      notExit++;
+    }else{
+      exit=i;
     }
   }
-  return 0;
+  if(notExit==(users.length-1)){
+    return 0;
+  }else{
+    if(uPwd==users[exit].uPwd){
+      return exit;
+    }else{
+      return 0;
+    }
+  }
 }
 
 
@@ -118,7 +132,10 @@ exports.index = function(req, res) {
 };
 
 exports.register = function(req, res){
-    res.render('pages/register',{
+  firebase.database().ref('/user').once('value').then(function(snapshot) {
+    users=snapshot.val();
+  });
+  res.render('pages/register',{
     users: users
   });
 };
@@ -202,8 +219,11 @@ exports.pResult = function(req, res){
   saveWork(wName, wContent, wPic, uNum, uAccount, uName);
 };
 exports.personal = function(req, res) {
+  var id = req.param('id');
   if(req.session.uNum!=null){
     res.render('pages/personal',{
+      id: id,
+      authorAccount: users[id].uAccount,
       uName: users[req.session.uNum].uName,
       uAccount: users[req.session.uNum].uAccount,
       uNum: req.session.uNum
@@ -232,6 +252,31 @@ exports.work =function(req, res) {
       authorName: authorName,
       img: img[id].base64,
       date: img[id].date,
+      wName: img[id].wName,
+      wContent: img[id].wContent,
+      uNum: req.session.uNum
+    });
+  });
+};
+
+exports.wark =function(req, res) {
+  var id = req.param('id');
+  var author=req.param('author');
+  firebase.database().ref('/user').once('value').then(function(snapshot) {
+    users=snapshot.val();
+  });
+  var authorAccount=users[author].uAccount;
+  var authorName=users[author].uName;
+  var img= new Array();
+  firebase.database().ref('/'+authorAccount).once('value').then(function(snapshot) {
+    img=snapshot.val();
+    res.render('pages/wark',{
+      authorId: author,
+      authorName: authorName,
+      img: img[id].base64,
+      date: img[id].date,
+      wName: img[id].wName,
+      wContent: img[id].wContent,
       uNum: req.session.uNum
     });
   });
