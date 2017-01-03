@@ -331,28 +331,25 @@ var uNum = "<%=uNum%>";
         //$('#wPic').val(myCanvas.toDataURL());
         //$( "#work" ).submit();
 
-        saveWork(wName, wContent, myCanvas.toDataURL(), uNum, uAccount, uName);
-        console.log("wNAME: "+wName);
-        console.log("uAccount: "+uAccount);
-        console.log("uNum: "+uNum);
-
-
-        
+        saveWork(wName, wContent, myCanvas.toDataURL(), uNum, uAccount, uName, toPersonal);
       }
-      //setTimeout(toPersonal(),8000);
+
 
 });
 
 function toPersonal(){
-  window.location = "/personal";
+  window.location = "/personal/?id=<%=uNum%>";
 }
 
-function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
- var imgId = undefined;
+
+function saveWork(wName, wContent, wPic, uNum, uAccount, uName, callback){
+
+
   var images= new Array();
+  var imgNum;
   firebase.database().ref('/images').once('value').then(function(snapshot) {
     images=snapshot.val();
-    var imgNum = images.length;
+    imgNum = images.length;
     console.log("IMAGELEN:"+imgNum);
     imgId = imgNum;
    
@@ -367,6 +364,7 @@ function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
     });
   });
 
+  console.log('logging');
   var person= new Array();
   firebase.database().ref('/'+uAccount).once('value').then(function(snapshot) {
     person=snapshot.val();
@@ -378,10 +376,14 @@ function saveWork(wName, wContent, wPic, uNum, uAccount, uName){
       uAccount: uAccount,
       wName: wName,
       uId: uNum,
-      imgId: imgId,
-      wContent: wContent
+      wContent: wContent,
+      totalId: imgNum
+
     });
   });
+setTimeout(function () {
+  callback();
+}, 10000)
 
   
 }

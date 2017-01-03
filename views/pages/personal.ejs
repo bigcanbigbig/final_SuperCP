@@ -76,7 +76,7 @@ if(uNum == ""){
         <li ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
           <a href="../wark?id={{img.$id}}&author={{img.uId}}"><img ng-src="{{img.base64}}"></a>
           <a class="imgname">{{img.wName}}</a>
-          <a id="delete" class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
+          <a id="delete" class="btn btn-danger btn-block" ng-click="deleteimg(img.$id,img.totalId)">Delete</a>
         </li>
         </ul>
         <div class="clear"></div>
@@ -110,6 +110,8 @@ img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
 
   var img = new Firebase("https://supercp-a8e9e.firebaseio.com/"+uAccount);
   $scope.imgs = $firebaseArray(img);
+  var img2 = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
+  $scope.imgs2 = $firebaseArray(img2);
 
   var index_img =  new Firebase("https://supercp-a8e9e.firebaseio.com/images");
 
@@ -117,7 +119,7 @@ img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
 
   
 
-  $scope.deleteimg = function(imgid) {
+  $scope.deleteimg = function(imgid,totalId) {
     if (imgid==1){
      var r = alert("You can't delete this image!");
     }else{
@@ -130,9 +132,11 @@ img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
               });
           }
         });
-        $scope.index_img.forEach(function(childSnapshot) {
-          if (childSnapshot.$id == img.imageId) {
-              $scope.index_img.$remove(childSnapshot).then(function(ref) {
+
+        $scope.imgs2.forEach(function(childSnapshot) {
+          console.log(childSnapshot.$id);
+          if (childSnapshot.$id == totalId) {
+              $scope.imgs2.$remove(childSnapshot).then(function(ref) {
                 ref.key() === childSnapshot.$id; // true
               });
           }
