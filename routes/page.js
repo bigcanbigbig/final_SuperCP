@@ -87,13 +87,15 @@ exports.index = function(req, res) {
       uName: users[req.session.uNum].uName,
       uAccount: users[req.session.uNum].uAccount,
       uNum: req.session.uNum,
-      users: users
+      users: users,
+      uLen: users.length
     });
   }else{
     res.render('pages/index',{
       uName: "",
       uAccount:"",
-      users: users
+      users: users,
+      uLen:0
     });
   }
   

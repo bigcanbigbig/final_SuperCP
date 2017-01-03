@@ -6,7 +6,6 @@ img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
   var img = new Firebase("https://supercp-a8e9e.firebaseio.com/images");
   $scope.imgs = $firebaseArray(img);
 
-  var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
   $scope.deleteimg = function(imgid) {
     var r = confirm("Do you want to remove this image ?");
