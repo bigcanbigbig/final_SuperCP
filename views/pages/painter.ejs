@@ -30,16 +30,33 @@ img
         height:20px;
 
     }
-    .toolbar span{
+.toolbar span{
     color:black;
     font-size:12px;2
     font-weight:light;
     font-family: '微軟正黑體';
-    }
+}
 li{
   font-size:16px;
   font-family: '微軟正黑體';
 }
+
+#exportImg{
+  border-radius: 5px;
+  background: #FF9D00;
+  border: 1px solid #FF9D00;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 44px;
+  letter-spacing: .5px;
+  padding: 0 25px;
+  text-align: center;
+  margin-top:20px;
+  font-size:24px;
+  font-family: '微軟正黑體';
+}
+
 
 .loader {
   border: 10px solid #f3f3f3;
@@ -50,6 +67,7 @@ li{
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   margin: 0 auto;
+  margin-top:10px;
 }
 
 @-webkit-keyframes spin {
@@ -303,7 +321,7 @@ var file = event.target.files[0];
   <input type="hidden" name="uNum" value="<%=uNum%>" />
   <input type="hidden" name="uName" value="<%=uName%>" />
   <input type="hidden" name="uAccount" value="<%=uAccount%>" />
-  <input id="exportImg" class="export" type="button" data-action="export-as-png" value="Export as PNG">
+  <input id="exportImg" class="export" type="button" data-action="export-as-png" value="完成">
   <div id="loader" class="loader" style="display:none;"></div>
 </form>
 

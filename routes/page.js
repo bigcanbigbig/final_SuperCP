@@ -118,7 +118,9 @@ exports.rSuccess = function(req, res){
   uName=req.body.uN;
 
   register(num, uAccount, uPwd, uName);
+  req.session.uNum=num;
   res.render('pages/rSuccess',{
+    uNum: req.session.uNum,
     uName: uName
   });
 };
