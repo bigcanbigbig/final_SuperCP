@@ -18,11 +18,9 @@
 <script type="text/javascript" src="assets/js/anyLine.js"></script>
 <script type="text/javascript" src="assets/colorpicker-master/jquery.colorpicker.js"></script>
 <script type="text/javascript" src="assets/colorpicker-master/parts/jquery.ui.colorpicker-rgbslider.js"></script>
-<script type="text/javascript" src="assets/js/json2.js"></script>
 <script type="text/javascript" src="assets/js/canvas.js"></script>
 
 
-<link href="assets/css/literallycanvas.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 <style type="text/css">
@@ -38,8 +36,31 @@ img
     font-weight:light;
     font-family: '微軟正黑體';
     }
+li{
+  font-size:16px;
+  font-family: '微軟正黑體';
+}
 
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
 
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
     </style>
 <%
 if(uName == ""){
@@ -183,7 +204,7 @@ var file = event.target.files[0];
           <input type="radio" id="tools_eraser" name="toolsOption" ><label for="tools_eraser">橡皮擦</label> &nbsp;
           <input type="radio" id="tools_trash" name="toolsOption"><label  for="tools_trash">清空</label>
           <div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;"><span>
-            <button id="tools_save">save</button>&nbsp;&nbsp;
+            
             <button id="tools_undo">undo</button>&nbsp;&nbsp;
             <button id="tools_redo">redo</button>
           </span></div>
@@ -200,7 +221,7 @@ var file = event.target.files[0];
       </fieldset>
       <fieldset style="float:left;width:180px;">
           <legend>線條設置</legend>
-          <span style="float: left;margin-top: 6px;">線條粗細: </span>
+          <span class="paint-board-text">線條粗細: </span>
                <select id="penWidth" >
                    <option value="1" selected>1px</option>
                    <option value="2">2px</option>
@@ -213,13 +234,13 @@ var file = event.target.files[0];
                    <option value="18">18px</option>
                </select>
               <div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;">
-          <span>邊框色:<input id="colorpicker-popup" type="text"  value="000000" style="width: 72px;display:none; "></span>&nbsp;
-          <span>填充色:<input id="colorpicker-popup2" type="text"  value="fe9810" style="width: 72px;display:none; "></span>
+          <span class="paint-board-text">顏色:&nbsp&nbsp&nbsp&nbsp <input id="colorpicker-popup" type="text"  value="000000" style="width: 72px;display:none; "></span>
+          
           </div>
        </fieldset>
       <fieldset style="float:left;width:220px;">
           <legend>字體設置</legend>
-          <span><span style="float: left;margin-top: 6px;">字體大小 :&nbsp;</span>
+          <span><span class="paint-board-text">字體大小 :&nbsp;</span>
               <select id="fontSize"  >
                      <option value="8px" selected>8px</option>
                      <option value="10px">10px</option>
@@ -239,23 +260,23 @@ var file = event.target.files[0];
                </select>
                </span>
                <br/>
-          <span><span style="float: left;margin-top: 6px;">字體選擇 :&nbsp;</span>              
-              <select id="fontType" style="top:20px;" >
+          <span><span class="paint-board-text">字體選擇 :&nbsp;</span>              
+              <select id="fontType">
                      <option value="宋体" >宋體</option>
                      <option value="微软雅黑">微軟雅黑</option>
                      <option value="仿宋">仿宋</option>
                      <option value="Arial" selected>Arial</option>
                      <option value="Consolas">Consolas</option>
                </select>
-          </span>
-          <span style="font-weight:bold;"><input type="checkbox" id="boldOption" name="fontOption"><label for="boldOption">B</label></span>
+          </span><br/>
+          <span style="font-weight:bold;margin-left:22px;"><input type="checkbox" id="boldOption" name="fontOption"><label for="boldOption">B</label></span>
           <span style="font-style: italic;"><input type="checkbox" id="italicOption" name="italicOption"><label for="italicOption">I</label></span>
        </fieldset>
        
        <div style="clear:both;"></div>
   </div>
    
-   <div style="position:relative;" id="container">
+   <div id="container">
      <div id="temp" style="border:1px solid gray;width:1px;height:1px;position:absolute;display:none;"></div>
   
   <canvas id="myCanvas" width="880" height="400" class="container_pencil">
@@ -282,12 +303,15 @@ var file = event.target.files[0];
   <input type="hidden" name="uNum" value="<%=uNum%>" />
   <input type="hidden" name="uName" value="<%=uName%>" />
   <input type="hidden" name="uAccount" value="<%=uAccount%>" />
-  <input class="export" type="button" data-action="export-as-png" value="Export as PNG">
+  <input id="exportImg" class="export" type="button" data-action="export-as-png" value="Export as PNG">
+  <div id="loader" class="loader" style="display:none;"></div>
 </form>
 
 
 <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
 <script>
+
+
 
   // Initialize Firebase
   // TODO: Replace with your project's customized code snippet
@@ -313,6 +337,10 @@ var uNum = "<%=uNum%>";
 
     console.log('gggg');
     $('.controls.export [data-action=export-as-png]').click(function(e) {
+
+    document.getElementById('loader').style.display="block";
+    document.getElementById('exportImg').style.display="none";
+
     var myCanvas = document.getElementById('myCanvas');
 
       if(uAccount == ""){

@@ -11,11 +11,11 @@ body{
 }
 
 .container_pencil{
-	cursor: url(images/PencilToolCursor.gif), pointer;
+	cursor: url(./images/PencilToolCursor.gif), pointer;
 }
 
 .container_eraser{
-	cursor: url(images/test.png), pointer;
+	cursor: url(./images/test.png), pointer;
 }
 
 .container_font{

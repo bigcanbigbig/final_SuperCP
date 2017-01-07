@@ -120,7 +120,7 @@ input[type=submit].export,input[type=button].sign{
 span{
 	color: #FF1462;
 }
-ul{
+/*ul{
 	margin-left: 5px;
 	margin-right: 5px;
 }
@@ -131,7 +131,7 @@ li{
 	margin-left: 5px;
 	margin-bottom: 4px;
 	float: left;
-}
+}*/
 img{
 	width: 320px;
 	height: 240px;
@@ -152,19 +152,23 @@ img{
 }
 
 
+.wrap{
+	width: 1000px;
+	text-align: center;
+	margin: 0 auto;
+}
+
 
 canvas {
 	box-shadow: 2px 2px 5px #404040;
-	width: 1000px;
-	height: 550px;
 }
 
 .container_pencil{
-	cursor: url(asstes/images/PencilToolCursor.gif), pointer;
+	cursor: url(../images/PencilToolCursor.gif), pointer;
 }
 
 .container_eraser{
-	cursor: url(asstes/images/test.png), pointer;
+	cursor: url(../images/test.png), pointer;
 }
 
 .container_font{
@@ -187,7 +191,13 @@ legend{
 }
 .toolbar{
 	padding: 10px;
-	width: 980px;
+	width: 860px;
 	background-color: #404040;
 	box-shadow: 2px 2px 2px #404040;
+	margin: 0 auto;
+}
+.paint-board-text{
+	float: left !important; 
+	margin-top: 6px !important; 
+	color:white !important;
 }
