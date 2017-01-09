@@ -294,7 +294,7 @@ var file = event.target.files[0];
        <div style="clear:both;"></div>
   </div>
    
-   <div id="container">
+   <div style="background:white;position:relative;" id="container">
      <div id="temp" style="border:1px solid gray;width:1px;height:1px;position:absolute;display:none;"></div>
   
   <canvas id="myCanvas" width="880" height="400" class="container_pencil">
@@ -321,7 +321,7 @@ var file = event.target.files[0];
   <input type="hidden" name="uNum" value="<%=uNum%>" />
   <input type="hidden" name="uName" value="<%=uName%>" />
   <input type="hidden" name="uAccount" value="<%=uAccount%>" />
-  <input id="exportImg" class="export" type="button" data-action="export-as-png" value="完成">
+  <input id="exportImg" class="export" type="button" data-action="export-as-png" value="完成"/>
   <div id="loader" class="loader" style="display:none;"></div>
 </form>
 
